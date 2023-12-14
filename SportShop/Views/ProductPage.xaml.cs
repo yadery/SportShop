@@ -26,11 +26,11 @@ namespace SportShop.Views
         {
             InitializeComponent();
             var categories = AppData.db.Categories.ToList();
-            foreach (var category in categories)
-            {
-                filterBox.Items.Add(category);
-            }
-            filterBox.SelectedIndex = 0;
+            //foreach (var category in categories)
+            //{
+            //    filterBox.Items.Add(category);
+            //}
+            //filterBox.SelectedIndex = 0;
             sortBox.SelectedIndex = 0;
             Update();
         }
@@ -54,21 +54,16 @@ namespace SportShop.Views
                     break;
             }
 
-            if (filterBox.SelectedIndex != 0)
-            {
-                content = content.Where(c => c.Categories.CategoryName == filterBox.SelectedItem.ToString()).ToList();
-            }
-
             content = content.Where(c => c.ProductName.ToLower().Contains(searchBox.Text.ToLower()) || c.Description.ToLower().Contains(searchBox.Text.ToLower())).ToList();
 
             var amount = AppData.db.Product.ToList().Count;
             if (amount == 0)
             {
-                searchBox.Text = "Нет совпадений";
+                resultbox.Text = "Нет совпадений";
             } 
             else
             {
-                searchBox.Text = $"Найдено {content.Count} вещей из {amount}";
+                resultbox.Text = $"Найдено {content.Count} вещей из {amount}";
             }
 
             LWProducts.ItemsSource = null;
@@ -78,17 +73,17 @@ namespace SportShop.Views
 
         private void filterBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Update();
+            Update();
         }
 
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //Update();
+            Update();
         }
 
         private void sortBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Update();
+            Update();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)

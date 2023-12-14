@@ -43,7 +43,7 @@ namespace SportShop.@base
                 string path = Path.Combine(Directory.GetParent(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName)).FullName, @"Images\");
                 if (String.IsNullOrEmpty(Image) || String.IsNullOrWhiteSpace(Image) || Image == null)
                 {
-                    return path + "default.jpg";
+                    return path + "default_picture.png";
                 }
                 else
                 {

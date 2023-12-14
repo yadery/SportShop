@@ -17,16 +17,18 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox Name="searchBox" Style="{StaticResource CommonTextBox}" Width="200" TextChanged="searchBox_TextChanged"/>
+            <TextBox Name="searchBox" Style="{StaticResource CommonTextBox}" Width="400" TextChanged="searchBox_TextChanged"/>
             <ComboBox Name="sortBox" Style="{StaticResource CommonComboBox}" Margin="15 0 0 0" SelectionChanged="sortBox_SelectionChanged">
                 <ComboBoxItem Content="Название: А-Я"/>
                 <ComboBoxItem Content="Название: Я-А"/>
                 <ComboBoxItem Content="Стоимость: по возрастанию"/>
                 <ComboBoxItem Content="Стоимость: по убыванию"/>
             </ComboBox>
-            <ComboBox Name="filterBox" Style="{StaticResource CommonComboBox}" Margin="15 0 0 0" SelectionChanged="filterBox_SelectionChanged">
+            <TextBlock Grid.Row="0" HorizontalAlignment="Left" Text="126378123" Name="resultbox"  />
+
+            <!--<ComboBox Name="filterox" Style="{StaticResource CommonComboBox}" Margin="15 0 0 0" SelectionChanged="filterBox_SelectionChanged">
                 <ComboBoxItem Content="Все категории"/>
-            </ComboBox>
+            </ComboBox>-->
         </StackPanel>
 
         <TextBlock Grid.Row="1" Name="searchTB" Style="{StaticResource CommonBlock}" Width="auto"/>
