@@ -11,7 +11,7 @@
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+        
         <Frame Grid.Row="1" NavigationUIVisibility="Hidden" Name="AuthFrame"/>
     </Grid>
 </Window>

@@ -24,6 +24,6 @@ namespace SportShop
 
         public static SportsShopEntities db = new SportsShopEntities();
 
-        public static int UserID;
+        public static Users CurrentUser;
     }
 }

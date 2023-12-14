@@ -45,7 +45,7 @@ namespace SportShop.Views
                 {
                     if (currentUser.Login.Equals(TBLogin.Text) && currentUser.Password.Equals(TBPassword.Password))
                     {
-                        AppData.UserID = currentUser.ID;
+                        AppData.CurrentUser = currentUser;
                         if (currentUser.RoleID == 1)
                         {
                             //AdminWindow admin = new AdminWindow(); //currentUser.userID
@@ -63,7 +63,7 @@ namespace SportShop.Views
                         MessageBox.Show("Введите корректные логин и пароль", "Ошибка авторизации");
                     }
                 }
-            }
+            }   
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка " + ex.Message.ToString());

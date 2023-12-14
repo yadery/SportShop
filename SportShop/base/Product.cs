@@ -10,6 +10,7 @@
 namespace SportShop.@base
 {
     using System;
+    using System.IO;
     using System.Collections.Generic;
     
     public partial class Product
@@ -27,5 +28,22 @@ namespace SportShop.@base
         public virtual Categories Categories { get; set; }
         public virtual Providers Providers { get; set; }
         public virtual Size Size { get; set; }
+
+        public string correctimage
+        {
+            get
+            {
+                string path = Path.Combine(Directory.GetParent(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName)).FullName, @"Images\");
+                if (String.IsNullOrEmpty(Image) || String.IsNullOrWhiteSpace(Image) || Image == null)
+                {
+                    return path + "default.jpg";
+                }
+                else
+                {
+                    return path + Image;
+                }
+            }
+        }
     }
+
 }

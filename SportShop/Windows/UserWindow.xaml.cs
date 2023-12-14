@@ -25,6 +25,25 @@ namespace SportShop.Windows
             InitializeComponent();
             AppData.frameUser = ProductFrame;
             ProductFrame.Navigate(new Views.ProductPage());
+            Update();
+        }
+        public void Update()
+        {
+            var currentUser = AppData.CurrentUser;
+            LoginTB.Text += currentUser.Login;
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProductFrame.CanGoBack) ProductFrame.GoBack();  
+        }
+
+        private void exitButton_Click(object sender, RoutedEventArgs e)
+        {
+            AuthWindow authWindow = new AuthWindow();
+            authWindow.Show();
+            AppData.CurrentUser = null;
+            this.Close();
         }
     }
 }

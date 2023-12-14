@@ -5,28 +5,75 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SportShop.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProductPage" Background="AntiqueWhite">
+      d:DesignHeight="615" d:DesignWidth="1150"
+      Title="Товары">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*" />
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Products"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Name="searchBox" Style="{StaticResource CommonTextBox}" Width="200" TextChanged="searchBox_TextChanged"/>
+            <ComboBox Name="sortBox" Style="{StaticResource CommonComboBox}" Margin="15 0 0 0" SelectionChanged="sortBox_SelectionChanged">
+                <ComboBoxItem Content="Название: А-Я"/>
+                <ComboBoxItem Content="Название: Я-А"/>
+                <ComboBoxItem Content="Стоимость: по возрастанию"/>
+                <ComboBoxItem Content="Стоимость: по убыванию"/>
+            </ComboBox>
+            <ComboBox Name="filterBox" Style="{StaticResource CommonComboBox}" Margin="15 0 0 0" SelectionChanged="filterBox_SelectionChanged">
+                <ComboBoxItem Content="Все категории"/>
+            </ComboBox>
+        </StackPanel>
 
-        <ListView Grid.Row="1" Name="LWProducts" >
+        <TextBlock Grid.Row="1" Name="searchTB" Style="{StaticResource CommonBlock}" Width="auto"/>
+
+        <ListView Name="LWProducts" Grid.Row="2" BorderBrush="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock FontSize="14" TextAlignment="Center" Text="{Binding Article}"/>
-                        <TextBlock FontSize="14" TextAlignment="Center" Text="{Binding ProductName}"/>
-                        <TextBlock FontSize="14" TextAlignment="Center" Text="{Binding Description}"/>
-                        <TextBlock FontSize="14" TextAlignment="Center" Text="{Binding Categories.CategoryName}"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="300" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="200" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="{Binding correctimage}" />
+                        <TextBlock Grid.Column="1" Text="{Binding ProductName}" Style="{StaticResource ListViewElementBlock}" VerticalAlignment="Center"/>
+                        <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Категория: " Style="{StaticResource ListViewSubTitleBlock}"/>
+                                <TextBlock Text="{Binding Categories.CategoryName}" Style="{StaticResource ListViewElementBlock}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Описание: " Style="{StaticResource ListViewSubTitleBlock}"/>
+                                <TextBlock Text="{Binding Description}" Style="{StaticResource ListViewElementBlock}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="3" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Стоимость: " Style="{StaticResource ListViewSubTitleBlock}"/>
+                                <TextBlock Text="{Binding Price}" Style="{StaticResource ListViewElementBlock}"/>
+                                <TextBlock Text="руб." Style="{StaticResource ListViewElementBlock}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Остаток: " Style="{StaticResource ListViewSubTitleBlock}"/>
+                                <TextBlock Text="{Binding Count}" Style="{StaticResource ListViewElementBlock}"/>
+                                <TextBlock Text=" шт." Style="{StaticResource ListViewElementBlock}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <Button Grid.Column="4" Click="btnEdit_Click" Style="{StaticResource CommonButton}" Content="Изменить"/>
+                        <Button Grid.Column="5" Click="btnDelete_Click" Style="{StaticResource CommonButton}" Content="Удалить" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        
     </Grid>
 </Page>

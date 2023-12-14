@@ -13,16 +13,18 @@
                     
                     HorizontalAlignment="Center">
 
-            <TextBlock Text="Логин" />
-            <TextBox Name="TBLogin"/>
-            <TextBlock Text="Пароль"/>
-            <PasswordBox Name="TBPassword"/>
-            <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource CommonBlock}" Text="Логин" />
+            <TextBox Style="{StaticResource CommonTextBox}" Name="TBLogin"/>
+            <TextBlock Style="{StaticResource CommonBlock}" Text="Пароль"/>
+            <PasswordBox Style="{StaticResource CommonPasswordBox}" Name="TBPassword"/>
+            <StackPanel Orientation="Vertical">
                 <Button Click="BtnSignIn_Click"
-                        Content="Войти"/>
+                        Content="Войти"
+                        Style="{StaticResource CommonButton}"/>
 
                 <Button Click="BtnSignInAsGuest_Click"
-                        Content="Войти как гость"/>
+                        Content="Войти как гость"
+                        Style="{StaticResource CommonButton}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
