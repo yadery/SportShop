@@ -1,53 +1,52 @@
-﻿<Page x:Class="SportShop.Views.AddEditProductPage"
+﻿<Page x:Class="SportShop.Views.RequestPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SportShop.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="615" d:DesignWidth="1150"
-      Title="AddEditProductPage">
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RequestPage">
 
     <Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 0 10 0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Артикль: " Style="{StaticResource DetailsTitleBlock}"/>
-                    <TextBox Name="ArticleBox" Style="{StaticResource CommonTextBox}" Width="230"/>
+                    <TextBox IsEnabled="False" Name="ArticleBox" Style="{StaticResource CommonTextBox}" Width="230"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Название: " Style="{StaticResource DetailsTitleBlock}"/>
-                    <TextBox Name="nameBox" Style="{StaticResource CommonTextBox}" Width="230"/>
+                    <TextBox IsEnabled="False" Name="nameBox" Style="{StaticResource CommonTextBox}" Width="230"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Описание: " Style="{StaticResource DetailsTitleBlock}" VerticalAlignment="Top"/>
-                    <TextBox Name="descriptionBox" Style="{StaticResource DescriptionTextBox}"/>
+                    <TextBox IsEnabled="False" Name="descriptionBox" Style="{StaticResource DescriptionTextBox}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Категория: " Style="{StaticResource DetailsTitleBlock}"/>
-                    <ComboBox Name="categoryBox" Style="{StaticResource CommonComboBox}"/>
+                    <ComboBox IsEnabled="False" Name="categoryBox" Style="{StaticResource CommonComboBox}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Стоимость: " Style="{StaticResource DetailsTitleBlock}"/>
-                    <TextBox Name="priceBox" Style="{StaticResource CommonTextBox}" Width="230"/>
+                    <TextBox IsEnabled="False" Name="priceBox" Style="{StaticResource CommonTextBox}" Width="230"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Количество на складе: " Style="{StaticResource DetailsTitleBlock}"/>
-                    <TextBox Name="amountInStock" Style="{StaticResource CommonTextBox}" Width="230"/>
+                    <TextBox IsEnabled="False" Name="amountInStock" Style="{StaticResource CommonTextBox}" Width="230"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Производитель: " Style="{StaticResource DetailsTitleBlock}"/>
-                    <ComboBox Name="manufacturerBox" Style="{StaticResource CommonComboBox}"/>
+                    <ComboBox IsEnabled="False" Name="manufacturerBox" Style="{StaticResource CommonComboBox}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Размер: " Style="{StaticResource DetailsTitleBlock}"/>
-                    <ComboBox Name="sizeBox" Style="{StaticResource CommonComboBox}"/>
+                    <ComboBox IsEnabled="False" Name="sizeBox" Style="{StaticResource CommonComboBox}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <Image Name="imageBox" Source="/Images/default_picture.png" Height="250"/>
-                <Button Name="selectImageButton" Click="selectImageButton_Click" Content="Выбрать фотографию" Style="{StaticResource CommonButton}"/>
-                <Button Name="saveButton" Click="saveButton_Click" Content="Сохранить изменения" Style="{StaticResource CommonButton}"/>
+                <Button Name="reauestProduct" VerticalAlignment="Center" Click="requestProductBtn_Click" Content="Оформить товар" Style="{StaticResource CommonButton}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

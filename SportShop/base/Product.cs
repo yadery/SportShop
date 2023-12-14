@@ -15,7 +15,13 @@ namespace SportShop.@base
     
     public partial class Product
     {
-        public string Article { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.Request = new HashSet<Request>();
+        }
+    
+        public int Article { get; set; }
         public int CategoryID { get; set; }
         public int SizeID { get; set; }
         public int ProviderID { get; set; }
@@ -28,8 +34,9 @@ namespace SportShop.@base
         public virtual Categories Categories { get; set; }
         public virtual Providers Providers { get; set; }
         public virtual Size Size { get; set; }
-
-        public string correctimage
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Request> Request { get; set; }
+        public string correctImage
         {
             get
             {
@@ -45,5 +52,4 @@ namespace SportShop.@base
             }
         }
     }
-
 }

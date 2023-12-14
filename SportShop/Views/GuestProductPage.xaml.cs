@@ -1,7 +1,6 @@
 ﻿using SportShop.@base;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +17,11 @@ using System.Windows.Shapes;
 namespace SportShop.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ProductPage.xaml
+    /// Логика взаимодействия для UserProductPage.xaml
     /// </summary>
-    public partial class ProductPage : Page
+    public partial class GuestProductPage : Page
     {
-        public ProductPage()
+        public GuestProductPage()
         {
             InitializeComponent();
             var categories = AppData.db.Categories.ToList();
@@ -35,7 +34,8 @@ namespace SportShop.Views
             Update();
         }
 
-        public void Update(){
+        public void Update()
+        {
             var content = AppData.db.Product.ToList();
 
             switch (sortBox.SelectedIndex)
@@ -65,51 +65,27 @@ namespace SportShop.Views
             if (amount == 0)
             {
                 searchBox.Text = "Нет совпадений";
-            } 
+            }
             else
             {
-                searchBox.Text = $"Найдено {content.Count} вещей из {amount}";
+                
             }
 
             LWProducts.ItemsSource = null;
             LWProducts.ItemsSource = content;
         }
 
-
-        private void filterBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnAddCart_Click(object sender, RoutedEventArgs e)
         {
-            //Update();
-        }
-
-        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //Update();
-        }
-
-        private void sortBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //Update();
-        }
-
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-            var button = (Button) sender;
+            var button = (Button)sender;
             var currentProduct = button.DataContext as Product;
-            NavigationService.Navigate(new AddEditProductPage(currentProduct));
+            NavigationService.Navigate(new RequestPage(currentProduct));
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
-            var currentProduct = (sender as Button).DataContext as Product;
-            if (MessageBox.Show("Вы уверены что хотите удалить этот продукт?", "Внимание", 
-                MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes) 
-            {
-                AppData.db.Product.Remove(currentProduct);
-                AppData.db.SaveChanges();   
-                Update();
-            }
-        }
 
-        
+        }
     }
 }
+

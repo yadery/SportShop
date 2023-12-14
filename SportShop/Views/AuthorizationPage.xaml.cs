@@ -46,15 +46,16 @@ namespace SportShop.Views
                     if (currentUser.Login.Equals(TBLogin.Text) && currentUser.Password.Equals(TBPassword.Password))
                     {
                         AppData.CurrentUser = currentUser;
-                        if (currentUser.RoleID == 1)
+                        if (currentUser.RoleID == 3 ) //admin check
                         {
-                            //AdminWindow admin = new AdminWindow(); //currentUser.userID
-                           // admin.Show();
+                            UserWindow admin = new UserWindow();
+                            admin.Show();
+                            
                         }
                         else
                         {
-                            UserWindow userWindow = new UserWindow();
-                            userWindow.Show();
+                            GuestWindow userGuest = new GuestWindow();
+                            userGuest.Show();
                         }
                         Window.GetWindow(this).Close();
                     }
@@ -72,7 +73,9 @@ namespace SportShop.Views
 
         private void BtnSignInAsGuest_Click(object sender, RoutedEventArgs e)
         {
-
+            GuestWindow guestWindow = new GuestWindow();
+            guestWindow.Show();
+            Window.GetWindow(this).Close();
         }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using Microsoft.Win32;
 using SportShop.@base;
+using System;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace SportShop.Views
 {
@@ -14,111 +17,126 @@ namespace SportShop.Views
     public partial class AddEditProductPage : Page
     {
         public Product currentProduct;
-        public byte[] imageData = null;
-        public string currentImage = null;
-        public string extension = ".png";
-        public string selectedFileName;
-        public string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName + $"/Resources/";
+        private byte[] _mainImageData = null;
+        public string img = null;
+        public string path = Path.Combine(Directory.GetParent(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName)).FullName, @"Images\");
+        public string selectefFileName;
+        public string extension = "";
+
+        public AddEditProductPage()
+        {
+            InitializeComponent();
+            this.WindowTitle = "Добавление товара";
+            var provider = AppData.db.Providers.Select(p => p.ProviderName).ToList();
+            manufacturerBox.ItemsSource = provider;
+            var category = AppData.db.Categories.Select(p => p.CategoryName).ToList();
+            categoryBox.ItemsSource = category;
+            var sizes = AppData.db.Size.Select(s => s.SizeName).ToList();
+            sizeBox.ItemsSource = sizes;
+        }
         public AddEditProductPage(Product product)
         {
             InitializeComponent();
-            FillComboBoxes();
-            if (product != null)
-            {
-                currentProduct = product;
-                Title = "Редактирование товара";
-                saveButton.Content = "Сохранить";
-                FillData();
-            }
-            else
-            {
-                currentProduct = null;
-                Title = "Добавление товара";
-                saveButton.Content = "Добавить";
-            }
-        }
-        private void FillComboBoxes()
-        {
-            categoryBox.ItemsSource = AppData.db.Categories.ToList().Select(c => c.CategoryName);
-            manufacturerBox.ItemsSource = AppData.db.Providers.ToList().Select(m => m.ProviderName);            
-        }
-        private void FillData()
-        {
-            nameBox.Text = currentProduct.ProductName;
-            descriptionBox.Text = currentProduct.Description;
-            categoryBox.SelectedItem = AppData.db.Categories.Where(pt => pt.ID == currentProduct.CategoryID).First().CategoryName;
+            currentProduct = product;
+            this.WindowTitle = "Редактирование товара";
+
+            ArticleBox.Text = currentProduct.Article.ToString();
+            nameBox.Text = currentProduct.ProductName.ToString();
+            descriptionBox.Text = currentProduct.Description.ToString();
+            categoryBox.SelectedItem = currentProduct.Categories.CategoryName;
             priceBox.Text = currentProduct.Price.ToString();
             amountInStock.Text = currentProduct.Count.ToString();
-            manufacturerBox.SelectedItem = AppData.db.Providers.Where(m => m.ID == currentProduct.ProviderID).First().ProviderName;           
-            currentImage = currentProduct.Image;
-            if (currentImage != null)
+            manufacturerBox.SelectedItem = currentProduct.Providers.ProviderName;
+            sizeBox.SelectedItem = currentProduct.Size.SizeName;
+            if (currentProduct.Image != null)
             {
-                imageData = File.ReadAllBytes(path + currentImage);
-                imageBox.Source = new ImageSourceConverter().ConvertFrom(imageData) as ImageSource;
+                _mainImageData = File.ReadAllBytes(path + currentProduct.Image);
+                imageBox.Source = new ImageSourceConverter().ConvertFrom(_mainImageData) as ImageSource;
             }
+
+            var provider = AppData.db.Providers.Select(p => p.ProviderName).ToList();
+            manufacturerBox.ItemsSource = provider;
+            var category = AppData.db.Categories.Select(p => p.CategoryName).ToList();
+            categoryBox.ItemsSource = category;
+            var sizes = AppData.db.Size.Select(s => s.SizeName).ToList();
+            sizeBox.ItemsSource = sizes;
         }
+
         private void selectImageButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Multiselect = false;
-            ofd.Filter = "Image | *.png; *.jpg; *.jpeg";
+            ofd.Filter = "Фото | *.png; *.jpg; *.jpeg";
             if (ofd.ShowDialog() == true)
             {
-                selectedFileName = ofd.FileName;
-                currentImage = Path.GetFileName(selectedFileName);
-                extension = Path.GetExtension(currentImage);
-                imageData = File.ReadAllBytes(selectedFileName);
-                imageBox.Source = new ImageSourceConverter().ConvertFrom(imageData) as ImageSource;
+                img = Path.GetFileName(ofd.FileName);
+                extension = Path.GetExtension(img);
+                selectefFileName = ofd.FileName;
+                _mainImageData = File.ReadAllBytes(ofd.FileName);
+                imageBox.Source = new ImageSourceConverter()
+                    .ConvertFrom(_mainImageData) as ImageSource;
             }
         }
+
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (currentImage != null)
+            var category = AppData.db.Categories.Where(a => a.CategoryName == categoryBox.SelectedItem.ToString()).FirstOrDefault();
+            var provider = AppData.db.Providers.Where(a => a.ProviderName == manufacturerBox.SelectedItem.ToString()).FirstOrDefault();
+            var sizes = AppData.db.Size.Where(a => a.SizeName == sizeBox.SelectedItem.ToString()).FirstOrDefault();
+            if (img != null)
             {
-                currentImage = nameBox.Text + extension;
-
+                img = ArticleBox.Text + extension;
+                var files = Directory.GetFiles(path);
                 int a = 0;
-                while (File.Exists(path + currentImage))
+                while (File.Exists(path + img))
                 {
                     a++;
-                    currentImage = $"{nameBox.Text}({a}){extension}";
+                    img = ArticleBox.Text + $" ({a})" + extension;
                 }
-                File.Copy(selectedFileName, path + currentImage);
+                path = path + img;
+                File.Copy(selectefFileName, path);
             }
-            else if (currentProduct.Image != null)
+            //else if (currentTovar.image != null)
+            //{
+            //    img = currentTovar.image;
+            //}
+            if (currentProduct == null)
             {
-                currentImage = currentProduct.Image;
-            }
-            if (currentProduct != null)
-            {
-                currentProduct.ProductName = nameBox.Text;
-                currentProduct.Description = descriptionBox.Text;
-                currentProduct.CategoryID = AppData.db.Categories.Where(pt => pt.CategoryName == categoryBox.Text).First().ID;
-                //currentProduct.Price = (decimal)(double.Parse(priceBox.Text));
-                currentProduct.Count = int.Parse(amountInStock.Text);
-                currentProduct.ProviderID = AppData.db.Providers.Where(m => m.ProviderName == manufacturerBox.Text).First().ID;                
-                currentProduct.Image = currentImage;
+                Product product = new Product()
+                {
+                    Article = Int32.Parse(ArticleBox.Text),
+                    ProductName = nameBox.Text,
+                    Description = descriptionBox.Text,
+                    CategoryID = category.ID,
+                    Price = Int32.Parse(priceBox.Text),
+                    Count = Int32.Parse(amountInStock.Text),
+                    SizeID = sizes.ID,
+                    ProviderID = provider.ID,
+                    
+                    Image = img
+
+                };
+                AppData.db.Product.Add(product);
                 AppData.db.SaveChanges();
-                MessageBox.Show("Товар успешно обновлен");
+                MessageBox.Show("Товар добавлен!");
             }
             else
             {
-                Product product = new Product();
-
-                product.ProductName = nameBox.Text;
-                product.Description = descriptionBox.Text;
-                product.CategoryID = AppData.db.Categories.Where(pt => pt.CategoryName == categoryBox.Text).First().ID;
-               // product.Price = (decimal)(double.Parse(priceBox.Text));
-                product.Count = int.Parse(amountInStock.Text);
-                product.ProviderID = AppData.db.Providers.Where(m => m.ProviderName == manufacturerBox.Text).First().ID;
-               
-                product.Image = currentImage;
-
-                AppData.db.Product.Add(product);
+                currentProduct.Image = img;
+                currentProduct.Article = Int32.Parse(ArticleBox.Text); 
+                currentProduct.ProductName = nameBox.Text;
+                currentProduct.Description = descriptionBox.Text;
+                currentProduct.Price = Int32.Parse(priceBox.Text);
+                currentProduct.ProviderID = provider.ID;
+                currentProduct.ProviderID = category.ID;
+                currentProduct.SizeID = sizes.ID;
                 AppData.db.SaveChanges();
-                MessageBox.Show("Товар успешно добавлен");
+                MessageBox.Show("Товар обновлен!");
+                currentProduct = null;
             }
-            NavigationService.Navigate(new ProductPage());
+            Windows.UserWindow window = new Windows.UserWindow();
+            window.Show();
+            Window.GetWindow(this).Close();
         }
     }
 }

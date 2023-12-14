@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\asano\Source\Repos\SportShop\SportShop\base\Model.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\asano\source\repos\SportShop\SportShop\base\Model.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

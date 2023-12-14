@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:SportShop.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AuthorizationPage" Background="AntiqueWhite">
+      Title="Вход" Background="White">
 
     <Grid>
         <StackPanel VerticalAlignment="Center"

@@ -26,10 +26,12 @@ namespace SportShop.@base
         }
     
         public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Providers> Providers { get; set; }
+        public virtual DbSet<Request> Request { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Size> Size { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
     }
 }
