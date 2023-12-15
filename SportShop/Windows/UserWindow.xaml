@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SportShop.Windows"
         mc:Ignorable="d"
-        Title="Спорт товары" Height="750" Width="1150" MinHeight="600" MinWidth="800">
+        Title="Спорт товары" Height="750" Width="1150" MinHeight="600" MinWidth="800"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>

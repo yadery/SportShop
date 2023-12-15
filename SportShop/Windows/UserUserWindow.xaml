@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SportShop.Windows"
         mc:Ignorable="d"
-        Title="UserUserWindow" Height="450" Width="800">
+        Title="UserUserWindow" Height="750" Width="1150"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
