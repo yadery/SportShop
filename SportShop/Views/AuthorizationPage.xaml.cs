@@ -54,7 +54,7 @@ namespace SportShop.Views
                         }
                         else
                         {
-                            GuestWindow userGuest = new GuestWindow();
+                            UserUserWindow userGuest = new UserUserWindow();
                             userGuest.Show();
                         }
                         Window.GetWindow(this).Close();

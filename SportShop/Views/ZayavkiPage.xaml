@@ -37,7 +37,7 @@
                                 </StackPanel>
                             </Border>
                             <Button Content="Удалить" Style="{StaticResource CommonButton}" Click="ButtonDelete_Click" Margin="590,7,17,5" />
-                            <Button Content="Подробнее" Style="{StaticResource CommonButton}"   FontSize="12"  Margin="500,8,89,6"/>
+                            <!--<Button Content="Подробнее" Style="{StaticResource CommonButton}"   FontSize="12"  Margin="500,8,89,6"/>-->
 
                         </Grid>
                     </Border>

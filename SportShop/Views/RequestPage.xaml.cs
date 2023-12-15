@@ -50,15 +50,22 @@ namespace SportShop.Views
 
         private void requestProductBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Request request = new Request()
+            if (AppData.CurrentUser == null)
             {
-                userID = AppData.CurrentUser.ID,
-                productArticle = currentProduct.Article,
+                MessageBox.Show("Чтобы оставлять заявки - зарегистрироваться");
+            }
+            else
+            {
+                Request request = new Request()
+                {
+                    userID = AppData.CurrentUser.ID,
+                    productArticle = currentProduct.Article,
 
-            };
-            AppData.db.Request.Add(request);
-            AppData.db.SaveChanges();
-            MessageBox.Show("Заявка отправлена!");
+                };
+                AppData.db.Request.Add(request);
+                AppData.db.SaveChanges();
+                MessageBox.Show("Заявка отправлена!");
+            }     
         }
     }
 }

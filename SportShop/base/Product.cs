@@ -36,16 +36,17 @@ namespace SportShop.@base
         public virtual Size Size { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Request> Request { get; set; }
+
         public string correctImage
         {
             get
             {
                 string path = Path.Combine(Directory.GetParent(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName)).FullName, @"Images\");
                 if (String.IsNullOrEmpty(Image) || String.IsNullOrWhiteSpace(Image) || Image == null)
-                {
+        {
                     return path + "default_picture.png";
                 }
-                else
+        else
                 {
                     return path + Image;
                 }

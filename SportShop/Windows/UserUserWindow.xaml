@@ -1,11 +1,11 @@
-﻿<Window x:Class="SportShop.Windows.GuestWindow"
+﻿<Window x:Class="SportShop.Windows.UserUserWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SportShop.Windows"
         mc:Ignorable="d"
-        Title="Спорт товары" Height="750" Width="1150" MinHeight="600" MinWidth="800">
+        Title="UserUserWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -18,11 +18,11 @@
         <TextBlock HorizontalAlignment="Right" Name="LoginTB" Grid.Row="0" Text="Вы вошли как гость" Margin="0 0 10 0" Style="{StaticResource DetailsTitleBlock}"/>
         <Image Grid.Row="0" Source="/Images/logo.png" HorizontalAlignment="Left" Margin="15 0 0 0"/>
 
-        
+
         <Frame Grid.Row="1" NavigationUIVisibility="Hidden" Name="ProductFrame"/>
 
         <Button Grid.Row="2" Name="backButton" Style="{StaticResource CommonButton}" Content="Назад" Click="backButton_Click"/>
-       
+
         <Button Grid.Row="2" Name="exitButton" Style="{StaticResource CommonButton}" Content="Выход" HorizontalAlignment="Right" Click="exitButton_Click"/>
     </Grid>
 </Window>

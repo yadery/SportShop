@@ -24,7 +24,7 @@ namespace SportShop.Windows
             InitializeComponent();
             AppData.frameUser = ProductFrame;
             ProductFrame.Navigate(new Views.GuestProductPage());
-            
+           // LoginTB.Text = AppData.CurrentUser.Login.ToString();
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

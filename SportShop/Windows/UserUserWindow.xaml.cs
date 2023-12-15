@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Navigation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -16,27 +15,21 @@ using System.Windows.Shapes;
 namespace SportShop.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для UserWindow.xaml
+    /// Логика взаимодействия для UserUserWindow.xaml
     /// </summary>
-    public partial class UserWindow : Window
+    public partial class UserUserWindow : Window
     {
-        public UserWindow()
+        public UserUserWindow()
         {
             InitializeComponent();
             AppData.frameUser = ProductFrame;
-            ProductFrame.Navigate(new Views.ProductPage());
+            ProductFrame.Navigate(new Views.GuestProductPage());
             LoginTB.Text = AppData.CurrentUser.Login.ToString();
-            Update();
-        }
-        public void Update()
-        {
-            var currentUser = AppData.CurrentUser;
-            LoginTB.Text += currentUser.Login;
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ProductFrame.CanGoBack) ProductFrame.GoBack();  
+            if (ProductFrame.CanGoBack) ProductFrame.GoBack();
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
@@ -45,16 +38,6 @@ namespace SportShop.Windows
             authWindow.Show();
             AppData.CurrentUser = null;
             this.Close();
-        }
-
-        private void addProduct_Click(object sender, RoutedEventArgs e)
-        {
-            AppData.frameUser.Navigate(new Views.AddEditProductPage());
-        }
-
-        private void zayavkiButton_Click(object sender, RoutedEventArgs e)
-        {
-            AppData.frameUser.Navigate(new Views.ZayavkiPage());
         }
     }
 }

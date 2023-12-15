@@ -31,11 +31,13 @@ namespace SportShop.Views
             }
             filterBox.SelectedIndex = 0;
             sortBox.SelectedIndex = 0;
+            
             Update();
         }
 
         public void Update()
-        {
+        {          
+
             var content = AppData.db.Product.ToList();
 
             switch (sortBox.SelectedIndex)
@@ -84,7 +86,19 @@ namespace SportShop.Views
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var button = (Button)sender;
+                var currentProduct = button.DataContext as Product;
+                NavigationService.Navigate(new RequestPage(currentProduct));
+            //if (AppData.CurrentUser == null)
+            //{
+            //    return;
+            //}
+            //else
+            //{
+            //    var button = (Button)sender;
+            //    var currentProduct = button.DataContext as Product;
+            //    NavigationService.Navigate(new RequestPage(currentProduct));
+            //}
         }
     }
 }

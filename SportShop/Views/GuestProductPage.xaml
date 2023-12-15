@@ -68,7 +68,7 @@
                                 <TextBlock Text=" шт." Style="{StaticResource ListViewElementBlock}"/>
                             </StackPanel>
                         </StackPanel>
-                        <Button Grid.Column="4" Click="InfoButton_Click" Style="{StaticResource CommonButton}" Content="Подробнее" Grid.ColumnSpan="2"/>
+                        <Button Grid.Column="4" Name="InfoButton" Click="InfoButton_Click" Style="{StaticResource CommonButton}" Content="Подробнее" Grid.ColumnSpan="2"/>
                         
                     </Grid>
                 </DataTemplate>

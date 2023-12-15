@@ -96,10 +96,10 @@ namespace SportShop.Views
                 path = path + img;
                 File.Copy(selectefFileName, path);
             }
-            //else if (currentTovar.image != null)
-            //{
-            //    img = currentTovar.image;
-            //}
+            else if (currentProduct.Image != null)
+            {
+                img = currentProduct.Image;
+            }
             if (currentProduct == null)
             {
                 Product product = new Product()
